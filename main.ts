@@ -1,8 +1,8 @@
 function SetL293in (num: number, num2: number, num3: number, num4: number) {
     pins.digitalWritePin(DigitalPin.P3, num)
     pins.digitalWritePin(DigitalPin.P4, num2)
-    pins.digitalWritePin(DigitalPin.P3, num3)
-    pins.digitalWritePin(DigitalPin.P3, num4)
+    pins.digitalWritePin(DigitalPin.P5, num3)
+    pins.digitalWritePin(DigitalPin.P6, num4)
 }
 bluetooth.onBluetoothConnected(function () {
     basic.showIcon(IconNames.Happy)
