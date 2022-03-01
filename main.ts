@@ -1,8 +1,8 @@
 function SetL293in (num: number, num2: number, num3: number, num4: number) {
     pins.digitalWritePin(DigitalPin.P3, num)
     pins.digitalWritePin(DigitalPin.P4, num2)
-    pins.digitalWritePin(DigitalPin.P5, num3)
-    pins.digitalWritePin(DigitalPin.P6, num4)
+    pins.digitalWritePin(DigitalPin.P6, num3)
+    pins.digitalWritePin(DigitalPin.P7, num4)
 }
 function SetMotor2Speed (speed: number) {
     if (speed < 0) {
@@ -132,6 +132,6 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         basic.showIcon(IconNames.Happy)
     }
 })
+led.enable(false)
 basic.showIcon(IconNames.SmallHeart)
 VersArduino(0, 0, 0)
-led.enable(false)
