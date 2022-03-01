@@ -31,9 +31,11 @@ function SetMotor1Speed (speed: number) {
     pins.analogWritePin(AnalogPin.P1, Math.round(Math.abs(speed) / 100 * 1023))
 }
 bluetooth.onBluetoothConnected(function () {
+    pins.digitalWritePin(DigitalPin.P9, 1)
     basic.showIcon(IconNames.Happy)
 })
 bluetooth.onBluetoothDisconnected(function () {
+    pins.digitalWritePin(DigitalPin.P9, 0)
     basic.showIcon(IconNames.Sad)
 })
 function VersArduino (Speed: number, MB1: number, MB2: number) {
@@ -135,3 +137,4 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
 led.enable(false)
 basic.showIcon(IconNames.SmallHeart)
 VersArduino(0, 0, 0)
+pins.digitalWritePin(DigitalPin.P9, 0)
