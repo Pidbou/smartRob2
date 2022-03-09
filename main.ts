@@ -64,6 +64,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         SetMotors(-50, -50)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_DOWN) {
         basic.showLeds(`
             . . # . .
@@ -72,8 +73,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . # . . .
             . . # . .
             `)
+        SetMotors(0, 20)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_DOWN) {
         basic.showLeds(`
             . . # . .
@@ -82,8 +85,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . . . # .
             . . # . .
             `)
+        SetMotors(20, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_DOWN) {
         basic.showLeds(`
             . . # . .
@@ -92,8 +97,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . . . . .
             . . . . .
             `)
+        SetMotors(20, 20)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
         basic.showLeds(`
             . . . . .
@@ -102,8 +109,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . . # . .
             . . # . .
             `)
+        SetMotors(-20, -20)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_DOWN) {
         basic.showLeds(`
             . . . . .
@@ -112,8 +121,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . . . . .
             . . . . .
             `)
+        SetMotors(-10, 10)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_DOWN) {
         basic.showLeds(`
             . . . . .
@@ -122,8 +133,10 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
             . . . . .
             . . . . .
             `)
+        SetMotors(10, -10)
     } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_UP) {
         basic.showIcon(IconNames.Happy)
+        SetMotors(0, 0)
     }
 })
 basic.showIcon(IconNames.SmallHeart)
