@@ -47,8 +47,9 @@ bluetooth.onUartDataReceived(serial.delimiters(Delimiters.Hash), function () {
     Forward = parseFloat(bluetooth.uartReadUntil(serial.delimiters(Delimiters.Hash)))
     if (Math.abs(Forward) < 10 && Math.abs(Right) < 10) {
         SetMotors(0, 0)
+    } else {
+        SetMotors((Forward + Right) / 2, (Forward - Right) / 2)
     }
-    SetMotors((Forward + Right) / 2, (Forward - Right) / 2)
 })
 let Forward = 0
 let Right = 0
