@@ -31,112 +31,26 @@ function SetMotor1Speed (speed2: number) {
     pins.analogWritePin(AnalogPin.P1, Math.round(Math.abs(speed2) / 100 * 1023))
 }
 bluetooth.onBluetoothConnected(function () {
+    bluetooth.startUartService()
     basic.showIcon(IconNames.Happy)
 })
 bluetooth.onBluetoothDisconnected(function () {
     basic.showIcon(IconNames.Sad)
+    SetMotors(0, 0)
 })
 function SetMotors (mot1: number, mot2: number) {
     SetMotor1Speed(mot1)
     SetMotor2Speed(mot2)
 }
-control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
-    if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_DOWN) {
-        basic.showLeds(`
-            . . # . .
-            . # . # .
-            # . . . #
-            . . . . .
-            . . . . .
-            `)
-        SetMotors(50, 50)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_A_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_DOWN) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            # . . . #
-            . # . # .
-            . . # . .
-            `)
-        SetMotors(-50, -50)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_B_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_DOWN) {
-        basic.showLeds(`
-            . . # . .
-            . # . . .
-            # . . . .
-            . # . . .
-            . . # . .
-            `)
-        SetMotors(0, 20)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_C_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_DOWN) {
-        basic.showLeds(`
-            . . # . .
-            . . . # .
-            . . . . #
-            . . . # .
-            . . # . .
-            `)
-        SetMotors(20, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_D_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_DOWN) {
-        basic.showLeds(`
-            . . # . .
-            . . # . .
-            . . # . .
-            . . . . .
-            . . . . .
-            `)
-        SetMotors(20, 20)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_1_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_DOWN) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . # . .
-            . . # . .
-            . . # . .
-            `)
-        SetMotors(-20, -20)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_2_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_DOWN) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            # # # . .
-            . . . . .
-            . . . . .
-            `)
-        SetMotors(-10, 10)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_3_UP) {
-        basic.showIcon(IconNames.Happy)
-        SetMotors(0, 0)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_DOWN) {
-        basic.showLeds(`
-            . . . . .
-            . . . . .
-            . . # # #
-            . . . . .
-            . . . . .
-            `)
-        SetMotors(10, -10)
-    } else if (control.eventValue() == EventBusValue.MES_DPAD_BUTTON_4_UP) {
-        basic.showIcon(IconNames.Happy)
+bluetooth.onUartDataReceived(serial.delimiters(Delimiters.Hash), function () {
+    Right = parseFloat(bluetooth.uartReadUntil(serial.delimiters(Delimiters.SemiColon)))
+    Forward = parseFloat(bluetooth.uartReadUntil(serial.delimiters(Delimiters.Hash)))
+    if (Math.abs(Forward) < 10 && Math.abs(Right) < 10) {
         SetMotors(0, 0)
     }
+    SetMotors((Forward + Right) / 2, (Forward - Right) / 2)
 })
+let Forward = 0
+let Right = 0
 basic.showIcon(IconNames.SmallHeart)
+SetMotors(0, 0)
